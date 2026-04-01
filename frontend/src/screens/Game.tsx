@@ -34,7 +34,7 @@ export default function Game({ matchId, myUserId, onGameEnd, onLeaveRoom }: Prop
 
   const myMark = gameState.marks[myUserId];
   const isMyTurn = gameState.turn === myUserId;
-  const opponentId = Object.keys(gameState.marks).find((id) => id !== myUserId);
+//   const opponentId = Object.keys(gameState.marks).find((id) => id !== myUserId);
 
   useEffect(() => {
     if (!gameOver) return;
@@ -113,7 +113,7 @@ export default function Game({ matchId, myUserId, onGameEnd, onLeaveRoom }: Prop
     onLeaveRoom();
   }
 
-  function getCellStyle(cell: string | null, index: number) {
+  function getCellStyle(cell: string | null) {
     const isClickable = isMyTurn && !cell && !gameOver;
     return {
       width: "100%",
@@ -170,7 +170,7 @@ export default function Game({ matchId, myUserId, onGameEnd, onLeaveRoom }: Prop
         {gameState.board.map((cell, i) => (
           <div
             key={i}
-            style={getCellStyle(cell, i) as any}
+            style={getCellStyle(cell) as any}
             onClick={() => handleCellClick(i)}
           >
             {cell}
