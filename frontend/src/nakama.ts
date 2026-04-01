@@ -5,7 +5,7 @@ const nakamaHost = import.meta.env.VITE_NAKAMA_HOST || window.location.hostname;
 export const client = new Client(
   "defaultkey",       // server key — must match socket.server_key in local.yml
   nakamaHost,           // host
-  "7350",             // port
+  "443",             // port
   true               // ssl — false for local dev, true in production
 );
 
