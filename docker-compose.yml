@@ -4,8 +4,8 @@ services:
     entrypoint:
       - "/bin/sh"
       - "-ecx"
-      - >
-        /nakama/nakama migrate up --database.address postgresql://postgres:uMtuNeqrtiwEfbMoScKRskunPiuBPIkd@postgres.railway.internal:5432/railway &&
+      - |
+        /nakama/nakama migrate up --database.address postgresql://postgres:uMtuNeqrtiwEfbMoScKRskunPiuBPIkd@postgres.railway.internal:5432/railway && \
         exec /nakama/nakama --config /nakama/data/local.yml --database.address postgresql://postgres:uMtuNeqrtiwEfbMoScKRskunPiuBPIkd@postgres.railway.internal:5432/railway        
     expose:
       - "7349"
