@@ -6,7 +6,11 @@ services:
       - "-ecx"
       - |
         /nakama/nakama migrate up --database.address postgresql://postgres:uMtuNeqrtiwEfbMoScKRskunPiuBPIkd@postgres.railway.internal:5432/railway && \
-        exec /nakama/nakama --config /nakama/data/local.yml --database.address postgresql://postgres:uMtuNeqrtiwEfbMoScKRskunPiuBPIkd@postgres.railway.internal:5432/railway        
+         exec /nakama/nakama \ 
+          --database.address postgresql://postgres:uMtuNeqrtiwEfbMoScKRskunPiuBPIkd@postgres.railway.internal:5432/railway \
+          --socket.address:0.0.0.0 \
+          --runtime.js_entrypoint build/tictactoe.js \
+          --logger.level INFO
     expose:
       - "7349"
       - "7350"
