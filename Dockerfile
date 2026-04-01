@@ -20,4 +20,5 @@ ENTRYPOINT ["/bin/sh", "-ecx", \
   --database.address $DATABASE_URL \
   --socket.address 0.0.0.0 \
   --runtime.js_entrypoint build/tictactoe.js \
+  --socket.cors_allowed_origins $FRONTEND_URL \
   --logger.level INFO"]
