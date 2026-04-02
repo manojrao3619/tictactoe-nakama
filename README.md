@@ -3,6 +3,14 @@
 A real-time, cross-device multiplayer TicTacToe game built with a **server-authoritative backend using Nakama** and a **React + TypeScript frontend**.
 
 ---
+## 🔗 Live Links
+
+- 🌐 Frontend (Live App): https://tictactoe-nakama-sable.vercel.app
+- ⚙️ Backend API: https://tictactoe-nakama-production-b230.up.railway.app
+- 🎥 Demo Video: https://drive.google.com/file/d/1kQU3gH1IFrK6MVvqgsn9XXTTzd97UYad/view?usp=drive_link
+
+
+---
 
 # 🚀 Live Overview
 
