@@ -1,14 +1,179 @@
-# TicTacToe Nakama
+# 🎮 TicTacToe Multiplayer (Nakama + React)
 
-A cross-device TicTacToe game built with React + TypeScript frontend and Nakama runtime backend.
+A real-time, cross-device multiplayer TicTacToe game built with a **server-authoritative backend using Nakama** and a **React + TypeScript frontend**.
 
-## Project structure
+---
 
-- `frontend/`: React + Vite app
-- `backend/`: Nakama module source and compiled build
-- `docker-compose.yml`: local Nakama + PostgreSQL setup
+# 🚀 Live Overview
 
-## Frontend setup
+This project demonstrates:
+
+* Real-time multiplayer game architecture
+* Server-authoritative game logic (no client-side cheating)
+* State synchronization across players
+* Persistent scoreboard using Nakama storage & leaderboard APIs
+
+---
+
+# 🧠 Architecture
+
+```text
+Frontend (React - Vercel)
+        ↓
+Nakama Server (TypeScript runtime modules)
+        ↓
+PostgreSQL (persistent storage)
+```
+
+### Flow:
+
+1. User connects → authenticates via Nakama
+2. Player joins or creates match
+3. Moves are sent to Nakama server
+4. Server validates move → updates game state
+5. Updated state is broadcast to all players
+
+---
+
+# ⚙️ Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Vite
+
+### Backend
+
+* Nakama (Go-based game server)
+* TypeScript runtime modules
+* Docker
+
+### Database
+
+* PostgreSQL (via Nakama)
+
+---
+
+# 🎯 Features
+
+## 🧩 Core Gameplay
+
+* Real-time multiplayer TicTacToe
+* Turn-based system with strict validation
+* Winner detection and game state sync
+
+## 🔐 Server-Authoritative Design
+
+* All moves validated on server
+* Prevents:
+
+  * invalid positions
+  * out-of-turn moves
+  * state manipulation
+
+## 🧮 Scoreboard System
+
+* Tracks player wins
+* Uses Nakama storage + leaderboard APIs
+* Tie-breaking using earliest win timestamp
+
+## 🔄 Match Lifecycle
+
+* Player join/leave handling
+* Match state persistence
+* Game restart flow
+
+---
+
+# 🏗️ Key Design Decisions
+
+## 1. Server-Authoritative Architecture
+
+All game logic runs on the backend.
+
+**Why?**
+
+* Prevent cheating
+* Maintain consistent game state
+* Simplify frontend logic
+
+---
+
+## 2. Nakama for Multiplayer Backend
+
+Used Nakama instead of building custom WebSocket server.
+
+**Advantages:**
+
+* Built-in matchmaking & sessions
+* Real-time messaging
+* Scalable architecture
+
+**Tradeoff:**
+
+* Requires understanding Nakama lifecycle
+* Limited JS runtime (Goja → ES5 constraints)
+
+---
+
+## 3. TypeScript for Backend Logic
+
+Game logic written in TypeScript and compiled to JS.
+
+**Advantages:**
+
+* Type safety
+* Better maintainability
+
+**Tradeoff:**
+
+* Must adapt to Nakama runtime limitations
+
+---
+
+## 4. Stateless Frontend
+
+Frontend only renders state from server.
+
+**Advantages:**
+
+* No desync issues
+* Simplified UI logic
+
+---
+
+# ⚖️ Tradeoffs & Limitations
+
+* Nakama JS runtime supports limited ES features (ES5)
+* Deployment complexity (Docker + networking)
+* No advanced matchmaking (basic implementation)
+* No reconnection handling (can be extended)
+
+---
+
+# 📦 Project Structure
+
+```text
+frontend/     → React application
+backend/      → Nakama TypeScript modules
+docker-compose.yml → local development setup
+```
+
+---
+
+# 🧪 Local Development
+
+## Backend
+
+```bash
+docker compose up -d
+cd backend
+npm install
+npm run build
+```
+
+## Frontend
 
 ```bash
 cd frontend
@@ -16,52 +181,66 @@ npm install
 npm run dev
 ```
 
-Build for production:
+---
+
+# 🌐 Deployment
+
+## Frontend
+
+* Vercel
+
+## Backend
+
+* Docker-based deployment
+* Railway
+
+---
+
+# 🔧 Environment Variables
+
+Frontend:
 
 ```bash
-npm run build
-npm run preview
+VITE_NAKAMA_HOST=your-backend-url
 ```
 
-## Backend setup
-
-1. Install Docker and Docker Compose
-2. Start Nakama + Postgres
-
+Backend:
 ```bash
-docker compose up -d
+DATABASE_URL=your_database_url
 ```
 
-3. Build backend module (TypeScript → JS), then mount in Nakama config
+---
 
-```bash
-cd backend
-npm install
-# ensure build outputs build/tictactoe.js
-npm run build
-```
+# 🧠 Learning Outcomes
 
-4. Configure Nakama to load the runtime module (usually in `nakama/modules.yml` or `nakama.yml`) with `build/tictactoe.js`.
+This project helped in understanding:
 
-## Default flow
+* Real-time system design
+* Multiplayer synchronization
+* Server-authoritative game logic
+* Containerized deployment (Docker)
+* Debugging distributed systems
 
-1. Login screen
-2. Matchmaking -> game
-3. Game ends -> leaderboard
-4. Play again/cancel
+---
 
-## Scoreboard + leaderboard
+# 🚀 Future Improvements
 
-- Backend stores scores in Nakama storage
-- Uses Nakama leaderboard API `leaderboardRecordWrite` + `leaderboardRecordsList`
-- Tie score ordering by first score timestamp (`reachedAt`)
+* Matchmaking queue system
+* Player reconnection handling
+* Spectator mode
+* Better UI/UX
+* Analytics (match history)
 
-## Deployment recommendations
+---
 
-- Frontend: Netlify / Vercel / Cloudflare Pages
-- Backend: Docker + VPS / Fly.io / Railway (if supported for custom containers) / local Docker
+# 📌 Conclusion
 
-## Notes
+This project showcases the ability to:
 
-- `requirements.txt` included for compatibility but this project is Node-based.
-- Set environment variable `VITE_NAKAMA_HOST` before deployment to point to the Nakama host.
+* Design and build real-time multiplayer systems
+* Handle backend architecture and state synchronization
+* Work with distributed systems and containerized environments
+
+---
+
+**Author:** Manoj Rao
