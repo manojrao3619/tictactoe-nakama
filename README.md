@@ -183,16 +183,34 @@ npm run dev
 
 ---
 
-# 🌐 Deployment
+# 🚀 Deployment
+
+## Backend (Nakama)
+
+1. Deploy Nakama using Docker to Railway
+2. Configure PostgreSQL database
+3. Set database connection:
+
+--database.address postgresql://USER:PASSWORD@HOST:5432/DB
+or --database.address DATABASE_URL
+and set the DATABASE_URL=your-database-url
+
+4. Ensure server listens on:
+
+--socket.address 0.0.0.0
+
+5. Expose port 7350 (API)
+
+---
 
 ## Frontend
 
-* Vercel
+1. Deploy to Vercel
+2. Set environment variable:
 
-## Backend
+VITE_NAKAMA_HOST=your-backend-domain
 
-* Docker-based deployment
-* Railway
+3. Ensure HTTPS connection (port 443)
 
 ---
 
@@ -208,6 +226,41 @@ Backend:
 ```bash
 DATABASE_URL=your_database_url
 ```
+
+---
+
+# ⚙️ Server Configuration
+
+- Default server key: `defaultkey`
+- API Port: `7350`
+- Console Port: `7351`
+
+### Client Configuration Example
+
+```js
+const client = new Client(
+  "defaultkey",
+  "your-backend-domain",
+  "443",
+  true
+);
+```
+
+---
+
+# 🧪 Testing Multiplayer
+
+1. Open the app in two browser tabs (or two devices)
+2. Login as two different users
+3. Create or join the same match
+4. Play moves alternately
+
+### Expected Behavior:
+- Moves sync in real-time
+- Turn enforcement is correct
+- Invalid moves are rejected
+- Winner is detected correctly
+- Scoreboard updates after game ends
 
 ---
 
