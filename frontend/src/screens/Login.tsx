@@ -24,7 +24,7 @@ export default function Login({ onLogin }: Props) {
       setSession(session);
       console.log("Authenticated! User ID:", session.user_id);
       // Open a WebSocket connection to Nakama with the session
-      const socket = client.createSocket(false, false);
+      const socket = client.createSocket(true, false);
       await socket.connect(session, true);
       setSocket(socket);
 
